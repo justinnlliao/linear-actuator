@@ -31,3 +31,4 @@ fp-info-cache
 
 *.lck
 kicad/linear_actuator/\#auto_saved_files\#
+kicad/linear_actuator/fp-info-cache
