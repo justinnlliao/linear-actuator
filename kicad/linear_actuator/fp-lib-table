@@ -1,4 +1,5 @@
 (fp_lib_table
   (version 7)
   (lib (name "spyglass")(type "KiCad")(uri "${KIPRJMOD}/../footprints/spyglass.pretty")(options "")(descr ""))
+  (lib (name "linear")(type "KiCad")(uri "C:/Users/TheHa/OneDrive/Documents/GitHub/linear-actuator/kicad/footprints/linear.pretty")(options "")(descr ""))
 )
