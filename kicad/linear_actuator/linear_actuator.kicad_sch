@@ -2312,7 +2312,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 129.54) (xy 138.43 129.54)
+			(xy 138.43 107.95) (xy 143.51 107.95)
 		)
 		(stroke
 			(width 0)
@@ -2392,7 +2392,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 129.54) (xy 110.49 129.54)
+			(xy 107.95 107.95) (xy 115.57 107.95)
 		)
 		(stroke
 			(width 0)
@@ -2402,7 +2402,7 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 152.4) (xy 120.65 154.94)
+			(xy 125.73 130.81) (xy 125.73 133.35)
 		)
 		(stroke
 			(width 0)
@@ -2412,7 +2412,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 139.7) (xy 110.49 139.7)
+			(xy 107.95 118.11) (xy 115.57 118.11)
 		)
 		(stroke
 			(width 0)
@@ -2422,7 +2422,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 142.24) (xy 110.49 142.24)
+			(xy 107.95 120.65) (xy 115.57 120.65)
 		)
 		(stroke
 			(width 0)
@@ -2442,7 +2442,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 134.62) (xy 110.49 134.62)
+			(xy 107.95 113.03) (xy 115.57 113.03)
 		)
 		(stroke
 			(width 0)
@@ -2622,7 +2622,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 132.08) (xy 110.49 132.08)
+			(xy 107.95 110.49) (xy 115.57 110.49)
 		)
 		(stroke
 			(width 0)
@@ -2642,7 +2642,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 132.08) (xy 138.43 132.08)
+			(xy 138.43 110.49) (xy 143.51 110.49)
 		)
 		(stroke
 			(width 0)
@@ -2692,7 +2692,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 152.4) (xy 125.73 154.94)
+			(xy 130.81 130.81) (xy 130.81 133.35)
 		)
 		(stroke
 			(width 0)
@@ -2772,7 +2772,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 124.46) (xy 110.49 124.46)
+			(xy 107.95 102.87) (xy 115.57 102.87)
 		)
 		(stroke
 			(width 0)
@@ -2782,7 +2782,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 137.16) (xy 138.43 137.16)
+			(xy 138.43 115.57) (xy 143.51 115.57)
 		)
 		(stroke
 			(width 0)
@@ -2792,7 +2792,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 144.78) (xy 110.49 144.78)
+			(xy 107.95 123.19) (xy 115.57 123.19)
 		)
 		(stroke
 			(width 0)
@@ -2822,7 +2822,7 @@
 	)
 	(wire
 		(pts
-			(xy 120.65 104.14) (xy 120.65 114.3)
+			(xy 125.73 82.55) (xy 125.73 92.71)
 		)
 		(stroke
 			(width 0)
@@ -2872,7 +2872,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 121.92) (xy 110.49 121.92)
+			(xy 107.95 100.33) (xy 115.57 100.33)
 		)
 		(stroke
 			(width 0)
@@ -2902,7 +2902,7 @@
 	)
 	(wire
 		(pts
-			(xy 133.35 134.62) (xy 138.43 134.62)
+			(xy 138.43 113.03) (xy 143.51 113.03)
 		)
 		(stroke
 			(width 0)
@@ -2912,7 +2912,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 104.14) (xy 125.73 114.3)
+			(xy 130.81 82.55) (xy 130.81 92.71)
 		)
 		(stroke
 			(width 0)
@@ -2983,7 +2983,7 @@
 		(uuid "12f6e145-e0fc-470e-905b-8ca3d90798c0")
 	)
 	(label "RST"
-		(at 102.87 121.92 0)
+		(at 107.95 100.33 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2994,7 +2994,7 @@
 		(uuid "42435df9-7d0f-4870-bd6a-899260c614ea")
 	)
 	(label "NET2{slash}"
-		(at 102.87 142.24 0)
+		(at 107.95 120.65 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3038,7 +3038,7 @@
 		(uuid "7dc046ca-b8e7-49e5-a115-7017aa83ac2c")
 	)
 	(label "STEP"
-		(at 102.87 132.08 0)
+		(at 107.95 110.49 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3049,7 +3049,7 @@
 		(uuid "93ea0605-4c10-491e-a58d-6c3eba8b9af1")
 	)
 	(label "NET3{slash}"
-		(at 102.87 144.78 0)
+		(at 107.95 123.19 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3093,7 +3093,7 @@
 		(uuid "c7f177b0-2396-4279-8bf3-33ff65b8b13b")
 	)
 	(label "ENBL"
-		(at 102.87 129.54 0)
+		(at 107.95 107.95 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3104,7 +3104,7 @@
 		(uuid "c814d8b5-0296-41f1-8428-f72688c2bb12")
 	)
 	(label "DIR"
-		(at 102.87 134.62 0)
+		(at 107.95 113.03 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3115,7 +3115,7 @@
 		(uuid "ca2ce0dc-de52-4746-bba5-b9281a4d5684")
 	)
 	(label "SLP"
-		(at 102.87 124.46 0)
+		(at 107.95 102.87 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3159,7 +3159,7 @@
 		(uuid "d50695f4-7b7d-41f9-8bd1-c6b84a7ff027")
 	)
 	(label "NET1{slash}"
-		(at 102.87 139.7 0)
+		(at 107.95 118.11 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3578,7 +3578,7 @@
 	)
 	(symbol
 		(lib_id "power:VBUS")
-		(at 125.73 104.14 0)
+		(at 130.81 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3587,7 +3587,7 @@
 		(fields_autoplaced yes)
 		(uuid "35337a22-4079-41b2-9265-f1a6f74573e6")
 		(property "Reference" "#PWR011"
-			(at 125.73 107.95 0)
+			(at 130.81 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3596,7 +3596,7 @@
 			)
 		)
 		(property "Value" "VMOT"
-			(at 125.73 99.06 0)
+			(at 130.81 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3604,7 +3604,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 125.73 104.14 0)
+			(at 130.81 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3613,7 +3613,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 125.73 104.14 0)
+			(at 130.81 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3622,7 +3622,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 125.73 104.14 0)
+			(at 130.81 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3748,7 +3748,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 125.73 154.94 0)
+		(at 130.81 133.35 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3758,7 +3758,7 @@
 		(fields_autoplaced yes)
 		(uuid "3ca759d0-4fa3-4d3a-9839-5d3acb68b1c9")
 		(property "Reference" "#PWR02"
-			(at 125.73 161.29 0)
+			(at 130.81 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3767,7 +3767,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 125.73 159.385 0)
+			(at 130.81 137.795 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3775,7 +3775,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 125.73 154.94 0)
+			(at 130.81 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3784,7 +3784,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 125.73 154.94 0)
+			(at 130.81 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3793,7 +3793,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 125.73 154.94 0)
+			(at 130.81 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3949,7 +3949,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x04_Socket")
-		(at 143.51 132.08 0)
+		(at 148.59 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3958,7 +3958,7 @@
 		(fields_autoplaced yes)
 		(uuid "7e107099-e1d8-4d45-8925-7c1c5cea3c66")
 		(property "Reference" "J1"
-			(at 144.78 132.0799 0)
+			(at 149.86 110.4899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3967,7 +3967,7 @@
 			)
 		)
 		(property "Value" "Motor Wire Connector"
-			(at 144.78 134.6199 0)
+			(at 149.86 113.0299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3976,7 +3976,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 143.51 132.08 0)
+			(at 148.59 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3985,7 +3985,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 143.51 132.08 0)
+			(at 148.59 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3994,7 +3994,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x04, script generated"
-			(at 143.51 132.08 0)
+			(at 148.59 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4025,7 +4025,7 @@
 	)
 	(symbol
 		(lib_id "power:VBUS")
-		(at 120.65 104.14 0)
+		(at 125.73 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4034,7 +4034,7 @@
 		(fields_autoplaced yes)
 		(uuid "88c4d45a-d142-4f9a-bdda-abc9dbb3b9b3")
 		(property "Reference" "#PWR012"
-			(at 120.65 107.95 0)
+			(at 125.73 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4043,7 +4043,7 @@
 			)
 		)
 		(property "Value" "VDD"
-			(at 120.65 99.06 0)
+			(at 125.73 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4051,7 +4051,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 120.65 104.14 0)
+			(at 125.73 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4060,7 +4060,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 120.65 104.14 0)
+			(at 125.73 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4069,7 +4069,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 120.65 104.14 0)
+			(at 125.73 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4385,7 +4385,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 120.65 154.94 0)
+		(at 125.73 133.35 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4395,7 +4395,7 @@
 		(fields_autoplaced yes)
 		(uuid "b4e9b51d-0a67-4fe0-b469-a9c66b6bfb73")
 		(property "Reference" "#PWR01"
-			(at 120.65 161.29 0)
+			(at 125.73 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4404,7 +4404,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 120.65 159.385 0)
+			(at 125.73 137.795 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4412,7 +4412,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 120.65 154.94 0)
+			(at 125.73 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4421,7 +4421,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 120.65 154.94 0)
+			(at 125.73 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4430,7 +4430,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 120.65 154.94 0)
+			(at 125.73 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4532,7 +4532,7 @@
 	)
 	(symbol
 		(lib_id "Driver_Motor:Pololu_Breakout_A4988")
-		(at 120.65 132.08 0)
+		(at 125.73 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4540,7 +4540,7 @@
 		(dnp no)
 		(uuid "cb56a444-11a8-4eaf-9e7e-f47b768e9ca7")
 		(property "Reference" "A1"
-			(at 128.27 151.892 0)
+			(at 133.35 130.302 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4549,7 +4549,7 @@
 			)
 		)
 		(property "Value" "A4988 Driver"
-			(at 128.27 154.432 0)
+			(at 133.35 132.842 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4558,7 +4558,7 @@
 			)
 		)
 		(property "Footprint" "Module:Pololu_Breakout-16_15.2x20.3mm"
-			(at 127.635 151.13 0)
+			(at 132.715 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4568,7 +4568,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.pololu.com/product/2980/pictures"
-			(at 123.19 139.7 0)
+			(at 128.27 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4577,7 +4577,7 @@
 			)
 		)
 		(property "Description" "Pololu Breakout Board, Stepper Driver A4988"
-			(at 120.65 132.08 0)
+			(at 125.73 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
