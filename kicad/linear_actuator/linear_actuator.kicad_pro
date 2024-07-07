@@ -68,7 +68,7 @@
         "connection_width": "warning",
         "copper_edge_clearance": "error",
         "copper_sliver": "warning",
-        "courtyards_overlap": "error",
+        "courtyards_overlap": "warning",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
         "drill_out_of_range": "error",
@@ -130,7 +130,7 @@
         "min_through_hole_diameter": 0.3,
         "min_track_width": 0.127,
         "min_via_annular_width": 0.13,
-        "min_via_diameter": 0.3,
+        "min_via_diameter": 0.46,
         "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
       },
@@ -216,7 +216,7 @@
           "drill": 0.0
         },
         {
-          "diameter": 0.46,
+          "diameter": 0.56,
           "drill": 0.3
         }
       ],
@@ -470,7 +470,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.127,
-        "via_diameter": 0.46,
+        "via_diameter": 0.56,
         "via_drill": 0.3,
         "wire_width": 6
       }
