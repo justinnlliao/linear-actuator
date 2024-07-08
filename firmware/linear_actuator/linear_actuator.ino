@@ -17,10 +17,10 @@ void setup() {
   Serial1.setTX(28);
   Serial1.setRX(29);
   // initialize both serial ports:
-  Serial.begin(115200);
+  //Serial.begin(115200);
   Serial1.begin(115200);
 }
 
 void loop() {
-  Serial.println("skibidi");
+  Serial1.print("boo");
 }
