@@ -40,6 +40,7 @@ void setup()
   pinMode(DIRECTION_PIN, OUTPUT);
   pinMode(STEP_PIN, OUTPUT);
   pinMode(SLEEP_PIN, OUTPUT);
+  pinMode(25, OUTPUT);
 
   stepper_driver.setRunCurrent(RUN_CURRENT_PERCENT);
   stepper_driver.enableCoolStep();
@@ -53,11 +54,14 @@ void loop()
   command.trim();
   if (command.equals("home")) {
     Serial.println(command);
+    digitalWrite(25, HIGH);
+    //home();
+    Serial1.println("skibidi");
   }
   if (command.equals("magnet")) {
     Serial.println(command);
+    magnet();
   }
-  command = "";
 }
 
 //stepper driver commanded to move pos amount of revs
@@ -72,11 +76,12 @@ void move(double revs, int dir) {
   }
 }
 
-void magnet() {
-  move(10, forward);
-}
-
 //resets the location at the lever and/or home location
 void home() {
     move(10, backward);
+}
+
+//moves the EPR into the magnet
+void magnet() {
+  move(10, forward);
 }
