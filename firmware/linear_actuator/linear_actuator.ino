@@ -2,24 +2,29 @@
 #include <Arduino.h>
 #include <SerialUART.h>
 #include <SerialUSB.h>
+#include <Adafruit_NeoPixel.h>
 
 //initialize Serial 1
-HardwareSerial & serial_stream = Serial1;
+SerialUART & serial_stream = Serial1;
 
 //initialize pins
 #define SW_LIMIT 3
 #define DIRECTION_PIN 20
 #define STEP_PIN 26
 #define SLEEP_PIN 27
+#define ENABLE_PIN 4
+
+#define NUMPIXELS 3
+
+Adafruit_NeoPixel pixels(NUMPIXELS, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
 
 //initialize direction
 #define forward 0
 #define backward 1
 
 #define RUN_CURRENT_PERCENT 100
-#define HALF_STEP_DELAY_MICROSECONDS 10
-
-#define HALF_STEPS_FOR_FULL_REV 400
+#define HALF_STEP_DELAY_MICROSECONDS 8
+#define STEPS_FOR_FULL_REV 51200
 
 const unsigned int MAX_MESSAGE_LENGTH = 10;
 
@@ -28,20 +33,19 @@ TMC2209 stepper_driver;
 
 void setup()
 {
-  Serial1.setTX(28);
-  Serial1.setRX(29);
+  stepper_driver.setup(serial_stream, 115200, TMC2209::SERIAL_ADDRESS_0, 29, 28);
   
   Serial.begin(115200);
   Serial1.begin(115200);
-
-  stepper_driver.setup(serial_stream);
 
   pinMode(SW_LIMIT, INPUT);
   pinMode(DIRECTION_PIN, OUTPUT);
   pinMode(STEP_PIN, OUTPUT);
   pinMode(SLEEP_PIN, OUTPUT);
-  pinMode(25, OUTPUT);
+  pinMode(ENABLE_PIN, OUTPUT);
 
+  stepper_driver.setup(serial_stream);
+  digitalWrite(ENABLE_PIN, LOW);
   stepper_driver.setRunCurrent(RUN_CURRENT_PERCENT);
   stepper_driver.enableCoolStep();
   stepper_driver.enable();
@@ -54,9 +58,7 @@ void loop()
   command.trim();
   if (command.equals("home")) {
     Serial.println(command);
-    digitalWrite(25, HIGH);
-    //home();
-    Serial1.println("skibidi");
+    home();
   }
   if (command.equals("magnet")) {
     Serial.println(command);
@@ -67,10 +69,10 @@ void loop()
 //stepper driver commanded to move pos amount of revs
 void move(double revs, int dir) {
   digitalWrite(DIRECTION_PIN, dir);
-  for(int i; i<revs*HALF_STEPS_FOR_FULL_REV; i++) {
+  for(int i; i<revs*STEPS_FOR_FULL_REV; i++) {
     digitalWrite(STEP_PIN, !digitalRead(STEP_PIN));
     delayMicroseconds(HALF_STEP_DELAY_MICROSECONDS);
-    if(digitalRead(SW_LIMIT) == 0) {
+    if(digitalRead(SW_LIMIT) == HIGH) {
       break;
     }
   }
