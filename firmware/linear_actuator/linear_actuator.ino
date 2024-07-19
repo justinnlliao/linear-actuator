@@ -23,8 +23,14 @@ Adafruit_NeoPixel pixels(NUMPIXELS, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
 #define backward 1
 
 #define RUN_CURRENT_PERCENT 100
+<<<<<<< Updated upstream
 #define HALF_STEP_DELAY_MICROSECONDS 8
 #define STEPS_FOR_FULL_REV 51200
+=======
+#define HALF_STEP_DELAY_MICROSECONDS 10
+
+#define HALF_STEPS_FOR_FULL_REV 51200*2
+>>>>>>> Stashed changes
 
 const unsigned int MAX_MESSAGE_LENGTH = 10;
 
@@ -57,12 +63,18 @@ void loop()
   String command = Serial.readString();
   command.trim();
   if (command.equals("home")) {
+<<<<<<< Updated upstream
     Serial.println(command);
+=======
+    digitalWrite(25, HIGH);
+
+>>>>>>> Stashed changes
     home();
   }
   if (command.equals("magnet")) {
     Serial.println(command);
-    magnet();
+
+    home();
   }
 }
 
@@ -80,10 +92,12 @@ void move(double revs, int dir) {
 
 //resets the location at the lever and/or home location
 void home() {
-    move(10, backward);
+  Serial1.println("returning home");
+  move(10, backward);
 }
 
 //moves the EPR into the magnet
 void magnet() {
+  Serial1.println("approaching magnet");
   move(10, forward);
 }
