@@ -3,6 +3,7 @@
 #include <SerialUART.h>
 #include <SerialUSB.h>
 #include <Adafruit_NeoPixel.h>
+#include <ctype.h>
 
 //initialize Serial 1
 SerialUART & serial_stream = Serial1;
@@ -22,17 +23,18 @@ Adafruit_NeoPixel pixels(NUMPIXELS, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
 #define forward 0
 #define backward 1
 
+#define OPERATING_LENGTH 83
+
 #define RUN_CURRENT_PERCENT 100
-<<<<<<< Updated upstream
 #define HALF_STEP_DELAY_MICROSECONDS 8
 #define STEPS_FOR_FULL_REV 51200
-=======
-#define HALF_STEP_DELAY_MICROSECONDS 10
+#define RUN_VELOCITY 20000
 
-#define HALF_STEPS_FOR_FULL_REV 51200*2
->>>>>>> Stashed changes
+#define HALF_STEP_DELAY_MICROSECONDS 40
 
-const unsigned int MAX_MESSAGE_LENGTH = 10;
+const unsigned int MAX_MESSAGE_LENGTH = 24;
+const unsigned int CURRENT_POS = 0;
+// const unsigned int time = 0;
 
 // Instantiate TMC2209
 TMC2209 stepper_driver;
@@ -51,7 +53,7 @@ void setup()
   pinMode(ENABLE_PIN, OUTPUT);
 
   stepper_driver.setup(serial_stream);
-  digitalWrite(ENABLE_PIN, LOW);
+  digitalWrite(ENABLE_PIN, HIGH);
   stepper_driver.setRunCurrent(RUN_CURRENT_PERCENT);
   stepper_driver.enableCoolStep();
   stepper_driver.enable();
@@ -59,45 +61,104 @@ void setup()
 
 void loop()
 {
-  while (Serial.available() == 0) {}
-  String command = Serial.readString();
-  command.trim();
-  if (command.equals("home")) {
-<<<<<<< Updated upstream
-    Serial.println(command);
-=======
-    digitalWrite(25, HIGH);
+  while (Serial.available() == 1) {
+    digitalWrite(ENABLE_PIN, HIGH);
+    String command = Serial.readString();
+    int millis = Serial.parseInt();
+    command.trim();
+    if (command.equals("home")) {
+      returnHome();
+    }
+    if (command.equals("magnet")) {
+      magnet();
+    }
+    if (command.equals("forward")) {
+      Serial1.println("manual direction set to forward");
+      digitalWrite(DIRECTION_PIN, 0);
+    }
+    if (command.equals("backward")) {
+      Serial1.println("manual direction set to backward");
+      digitalWrite(DIRECTION_PIN, 1);
+    }
+    if (millis != 0) {
+      int millis = command.toInt();
+      Serial1.print("moving ");
+      Serial1.print(millis);
+      Serial1.println(" millimeter(s)");
+      move(millis);
+    }
+    else {
+      Serial1.println("didn't recognize command");
+    }
 
->>>>>>> Stashed changes
-    home();
   }
-  if (command.equals("magnet")) {
-    Serial.println(command);
-
-    home();
-  }
+  digitalWrite(ENABLE_PIN, HIGH);
+  Serial1.println("no USB connection");
 }
 
-//stepper driver commanded to move pos amount of revs
-void move(double revs, int dir) {
-  digitalWrite(DIRECTION_PIN, dir);
-  for(int i; i<revs*STEPS_FOR_FULL_REV; i++) {
+void manualMove(double millis) {
+  for(int i; i<(millis*STEPS_FOR_FULL_REV*2/5); i++) {
     digitalWrite(STEP_PIN, !digitalRead(STEP_PIN));
     delayMicroseconds(HALF_STEP_DELAY_MICROSECONDS);
     if(digitalRead(SW_LIMIT) == HIGH) {
       break;
     }
+    // safetyStop();
   }
 }
 
-//resets the location at the lever and/or home location
-void home() {
-  Serial1.println("returning home");
-  move(10, backward);
+void move(double millis) {
+  digitalWrite(ENABLE_PIN, LOW);
+  for(int i; i<(millis*STEPS_FOR_FULL_REV*2/5); i++) {
+    digitalWrite(STEP_PIN, !digitalRead(STEP_PIN));
+    delayMicroseconds(HALF_STEP_DELAY_MICROSECONDS);
+    if(digitalRead(SW_LIMIT) == HIGH) {
+      break;
+    }
+    // safetyStop();
+  }
+}
+
+//stepper driver commanded to move pos amount of revs with direction considered
+void move(double millis, int dir) {
+  digitalWrite(ENABLE_PIN, LOW);
+  digitalWrite(DIRECTION_PIN, dir);
+  for(int i; i<(millis*STEPS_FOR_FULL_REV*2/5); i++) {
+    digitalWrite(STEP_PIN, !digitalRead(STEP_PIN));
+    delayMicroseconds(HALF_STEP_DELAY_MICROSECONDS);
+    if(digitalRead(SW_LIMIT) == HIGH) {
+      break;
+    }
+    // safetyStop();
+  }
+}
+
+//resets to home location
+void returnHome() {
+  digitalWrite(ENABLE_PIN, LOW);
+  digitalWrite(DIRECTION_PIN, LOW);
+  stepper_driver.moveAtVelocity(RUN_VELOCITY);
+  if (digitalRead(SW_LIMIT) == 1) {
+    stepper_driver.moveAtVelocity(0);
+    Serial1.println("returned home");
+  }
+  // safetyStop();
 }
 
 //moves the EPR into the magnet
 void magnet() {
+  digitalWrite(ENABLE_PIN, LOW);
   Serial1.println("approaching magnet");
-  move(10, forward);
+  move(50, forward);
 }
+
+// void safetyStop() {
+//   if (Serial.available() == 1) {
+//   String stop = Serial.read();
+//     if (stop.equals("stop")) {
+//       stepper_driver.moveAtVelocity(0);
+//       Serial1.println("stopped successfully")
+//       break();
+//     }
+//   }
+// }
