@@ -41,6 +41,14 @@ TMC2209 stepper_driver;
 
 void setup()
 {
+  #if defined(NEOPIXEL_POWER)
+  // If this board has a power control pin, we must set it to output and high
+  // in order to enable the NeoPixels. We put this in an #if defined so it can
+  // be reused for other boards without compilation errors
+  pinMode(NEOPIXEL_POWER, OUTPUT);
+  digitalWrite(NEOPIXEL_POWER, HIGH);
+  #endif
+
   stepper_driver.setup(serial_stream, 115200, TMC2209::SERIAL_ADDRESS_0, 29, 28);
   
   Serial.begin(115200);
@@ -58,17 +66,18 @@ void setup()
   stepper_driver.enableCoolStep();
   stepper_driver.enable();
 
-  #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
-  clock_prescale_set(clock_div_1);
-  #endif
-
   pixels.begin();
+  pixels.setBrightness(20);
+  pixels.fill(0xFF0000);
+  pixels.show();
 
   CURRENT_POS = 0;
 }
 
 void loop()
 {
+  digitalWrite(ENABLE_PIN, HIGH);
+  pixels.show();
   if (Serial.available() > 0) {
     String input = Serial.readStringUntil('\n'); // Read the command until newline
     input.trim(); // Remove any leading/trailing whitespace
@@ -117,7 +126,7 @@ void loop()
 }
 
 void manualMove(double number) {
-  pixels.setPixelColor(1, 0, 0, 255);
+  pixels.fill(0xFFFF00);
   pixels.show();
   digitalWrite(ENABLE_PIN, LOW);
   for(int i = 0; i<(number*STEPS_FOR_FULL_REV*2/5); i++) {
@@ -130,6 +139,9 @@ void manualMove(double number) {
       CURRENT_POS--;
     }
     if(lengthCheck() == true || safetyStop() == true) {
+      Serial.println("emergency stopped successfully");
+      pixels.fill(0xFF0000);
+      pixels.show();
       break;
     }
   }
@@ -137,7 +149,7 @@ void manualMove(double number) {
 
 //stepper driver commanded to move pos amount of revs with direction considered
 void move(double number, int dir) {
-  pixels.setPixelColor(1, 0, 0, 255);
+  pixels.fill(0xFFFF00);
   pixels.show();
   digitalWrite(ENABLE_PIN, LOW);
   digitalWrite(DIRECTION_PIN, dir);
@@ -151,14 +163,17 @@ void move(double number, int dir) {
       CURRENT_POS--;
     }
     if(lengthCheck() == true || safetyStop() == true) {
-     break;
+      Serial.println("emergency stopped successfully");
+      pixels.fill(0xFF0000);
+      pixels.show();
+      break;
     }
   }
 }
 
 //resets to home location
 void returnHome() {
-  pixels.setPixelColor(1, 0, 255, 0);
+  pixels.fill(0xFFFF00);
   pixels.show();
   digitalWrite(ENABLE_PIN, LOW);
   digitalWrite(DIRECTION_PIN, LOW);
@@ -167,6 +182,8 @@ void returnHome() {
   while (digitalRead(SW_LIMIT) == HIGH) {}
   stepper_driver.moveAtVelocity(0);
   CURRENT_POS = 0;
+  pixels.fill(0x00FF00);
+  pixels.show();
   Serial.println("returned home");
   // safetyStop();
 }
@@ -176,11 +193,18 @@ void magnet() {
   digitalWrite(ENABLE_PIN, LOW);
   Serial.println("approaching magnet");
   move(50, forward);
+  Serial.println("reached magnet");
+  pixels.fill(0x0000FF);
+  pixels.show();
+  if(lengthCheck() == true || safetyStop() == true) {
+    pixels.fill(0xFF0000);
+    pixels.show();
+  }
 }
 
 bool lengthCheck() {
   if (CURRENT_POS> TOTAL_POS || CURRENT_POS < 0) {
-    pixels.setPixelColor(1, 255, 0, 0);
+    pixels.fill(255, 0, 0);
     pixels.show();
     return true;
   }
@@ -189,12 +213,9 @@ bool lengthCheck() {
 
 bool safetyStop() {
   if (Serial.available() == 1) {
-   String stop = Serial.readStringUntil('\n');
-   stop.trim();
+    String stop = Serial.readStringUntil('\n');
+    stop.trim();
     if (stop.equals("stop")) {
-      Serial.println("stopped successfully");
-      pixels.setPixelColor(1, 255, 0, 0);
-      pixels.show();
       return true;
     }
   }
