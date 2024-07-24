@@ -36,6 +36,8 @@ const unsigned int MAX_MESSAGE_LENGTH = 24;
 unsigned int CURRENT_POS = 0;
 const int TOTAL_POS = OPERATING_LENGTH*51200*2/5;
 
+bool temp = false;
+
 // Instantiate TMC2209
 TMC2209 stepper_driver;
 
@@ -78,6 +80,7 @@ void loop()
 {
   digitalWrite(ENABLE_PIN, HIGH);
   pixels.show();
+  temp = false;
   if (Serial.available() > 0) {
     String input = Serial.readStringUntil('\n'); // Read the command until newline
     input.trim(); // Remove any leading/trailing whitespace
@@ -126,7 +129,7 @@ void loop()
 }
 
 void manualMove(double number) {
-  pixels.fill(0xFFFF00);
+  pixels.fill(0xFF8800);
   pixels.show();
   digitalWrite(ENABLE_PIN, LOW);
   for(int i = 0; i<(number*STEPS_FOR_FULL_REV*2/5); i++) {
@@ -145,11 +148,13 @@ void manualMove(double number) {
       break;
     }
   }
+  pixels.fill(0x0000FF);
+  pixels.show();
 }
 
 //stepper driver commanded to move pos amount of revs with direction considered
 void move(double number, int dir) {
-  pixels.fill(0xFFFF00);
+  pixels.fill(0xFF8800);
   pixels.show();
   digitalWrite(ENABLE_PIN, LOW);
   digitalWrite(DIRECTION_PIN, dir);
@@ -196,7 +201,7 @@ void magnet() {
   Serial.println("reached magnet");
   pixels.fill(0x0000FF);
   pixels.show();
-  if(lengthCheck() == true || safetyStop() == true) {
+  if(lengthCheck() == true || temp == true) {
     pixels.fill(0xFF0000);
     pixels.show();
   }
@@ -212,10 +217,11 @@ bool lengthCheck() {
 }
 
 bool safetyStop() {
-  if (Serial.available() == 1) {
+  while (Serial.available() > 0) {
     String stop = Serial.readStringUntil('\n');
     stop.trim();
     if (stop.equals("stop")) {
+      temp = true;
       return true;
     }
   }
