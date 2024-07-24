@@ -18,6 +18,7 @@ SerialUART & serial_stream = Serial1;
 #define NUMPIXELS 3
 
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
+#define DELAYVAL 500
 
 //initialize direction
 #define forward 1
@@ -27,9 +28,9 @@ Adafruit_NeoPixel pixels(NUMPIXELS, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
 #define STEPS_FOR_FULL_REV 51200
 #define RUN_VELOCITY 40000
 
-#define HALF_STEP_DELAY_MICROSECONDS 25
+#define HALF_STEP_DELAY_MICROSECONDS 20
 
-#define OPERATING_LENGTH 60
+#define OPERATING_LENGTH 80
 
 const unsigned int MAX_MESSAGE_LENGTH = 24;
 unsigned int CURRENT_POS = 0;
@@ -56,6 +57,12 @@ void setup()
   stepper_driver.setRunCurrent(RUN_CURRENT_PERCENT);
   stepper_driver.enableCoolStep();
   stepper_driver.enable();
+
+  #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
+  clock_prescale_set(clock_div_1);
+  #endif
+
+  pixels.begin();
 
   CURRENT_POS = 0;
 }
@@ -110,6 +117,8 @@ void loop()
 }
 
 void manualMove(double number) {
+  pixels.setPixelColor(1, 0, 0, 255);
+  pixels.show();
   digitalWrite(ENABLE_PIN, LOW);
   for(int i = 0; i<(number*STEPS_FOR_FULL_REV*2/5); i++) {
     digitalWrite(STEP_PIN, !digitalRead(STEP_PIN));
@@ -128,6 +137,8 @@ void manualMove(double number) {
 
 //stepper driver commanded to move pos amount of revs with direction considered
 void move(double number, int dir) {
+  pixels.setPixelColor(1, 0, 0, 255);
+  pixels.show();
   digitalWrite(ENABLE_PIN, LOW);
   digitalWrite(DIRECTION_PIN, dir);
   for(int i = 0; i<(number*STEPS_FOR_FULL_REV*2/5); i++) {
@@ -147,6 +158,8 @@ void move(double number, int dir) {
 
 //resets to home location
 void returnHome() {
+  pixels.setPixelColor(1, 0, 255, 0);
+  pixels.show();
   digitalWrite(ENABLE_PIN, LOW);
   digitalWrite(DIRECTION_PIN, LOW);
   Serial.println("heading home");
@@ -167,6 +180,8 @@ void magnet() {
 
 bool lengthCheck() {
   if (CURRENT_POS> TOTAL_POS || CURRENT_POS < 0) {
+    pixels.setPixelColor(1, 255, 0, 0);
+    pixels.show();
     return true;
   }
   return false;
@@ -174,9 +189,12 @@ bool lengthCheck() {
 
 bool safetyStop() {
   if (Serial.available() == 1) {
-   String stop = Serial.readString();
+   String stop = Serial.readStringUntil('\n');
+   stop.trim();
     if (stop.equals("stop")) {
       Serial.println("stopped successfully");
+      pixels.setPixelColor(1, 255, 0, 0);
+      pixels.show();
       return true;
     }
   }
